@@ -5,7 +5,7 @@ using NAudio.Wave;
 
 public class MicCapture
 {
-    private Microphone _mic = Microphone.Default;
+    private readonly Microphone _mic = Microphone.Default;
     private float _micFloatVolume;
     private float _lastMicFloatVolume;
 
