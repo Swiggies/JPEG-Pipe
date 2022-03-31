@@ -33,6 +33,7 @@ namespace PNGTube
         private Animation _activeAnimation = new Animations.Breathe();
         private bool _gameWindowActive;
         private float _spriteScale = 0.5f;
+        private int _framesPerSecond = 60;
 
         private Color _inativeColor
         {
@@ -56,8 +57,6 @@ namespace PNGTube
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            // Uncomment this to lock at 30 FPS
-            // this.TargetElapsedTime = TimeSpan.FromSeconds(1d / 144d);
         }
 
         protected override void Initialize()
@@ -72,6 +71,7 @@ namespace PNGTube
             //Console.WriteLine(_mc.Mic.State);
             _windowStartPos = Window.Position.ToVector2();
 
+            // Loading from settings
             if (!String.IsNullOrEmpty(_settings.SpritePath))
                 LoadSpriteFromPath(_settings.SpritePath);
             _spriteScale = _settings.SpriteScale;
@@ -81,6 +81,8 @@ namespace PNGTube
             _activeThreshold = _settings.Threshold;
             _activeAnimation = Animations.AllAnimations[_settings.ActiveAnimation];
             _inactiveAnimation = Animations.AllAnimations[_settings.InactiveAnimation];
+            _framesPerSecond = _settings.FPS;
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / (double)_framesPerSecond);
 
             // GUIRenderer = new ImGUIRenderer(this).Initialize().RebuildFontAtlas();
             _guiRenderer = new ImGuiRenderer(this);
@@ -223,6 +225,17 @@ namespace PNGTube
             {
                 _settings.SaveSettings();
             }
+
+            ImGui.Spacing();
+            // Advanced Settings
+            if (ImGui.CollapsingHeader("Advanced Settings"))
+            {
+                if (ImGui.SliderInt("FPS", ref _framesPerSecond, 15, 60))
+                {
+                    TargetElapsedTime = TimeSpan.FromSeconds(1d / (double)_framesPerSecond);
+                }
+            }
+
             ImGui.End();
             ImGui.PopStyleColor();
             _guiRenderer.AfterLayout();

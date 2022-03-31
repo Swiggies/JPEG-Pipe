@@ -7,13 +7,14 @@ using System;
 public class Settings
 {
     public string SpritePath;
-    public int ActiveAnimation = 2;
-    public int InactiveAnimation = 0;
+    public int ActiveAnimation = 3;
+    public int InactiveAnimation = 1;
     public Color ActiveColor = Color.White;
     public Color InactiveColor = Color.LightGray;
     public float SpriteScale = 0.5f;
     public float Threshold = 0.1f;
     public float Delay = 0.1f;
+    public int FPS = 60;
 
     public static Settings LoadSettings()
     {
