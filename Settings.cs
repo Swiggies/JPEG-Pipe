@@ -7,6 +7,8 @@ using System;
 public class Settings
 {
     public string SpritePath;
+    public int ActiveAnimation = 2;
+    public int InactiveAnimation = 0;
     public Color ActiveColor = Color.White;
     public Color InactiveColor = Color.LightGray;
     public float SpriteScale = 0.5f;

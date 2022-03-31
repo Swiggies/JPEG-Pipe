@@ -79,6 +79,8 @@ namespace PNGTube
             _inactiveColorV3 = ColorHelper.ColorToVec3(_settings.InactiveColor);
             _delayThreshold = _settings.Delay;
             _activeThreshold = _settings.Threshold;
+            _activeAnimation = Animations.AllAnimations[_settings.ActiveAnimation];
+            _inactiveAnimation = Animations.AllAnimations[_settings.InactiveAnimation];
 
             // GUIRenderer = new ImGUIRenderer(this).Initialize().RebuildFontAtlas();
             _guiRenderer = new ImGuiRenderer(this);
@@ -160,7 +162,9 @@ namespace PNGTube
         {
             _guiRenderer.BeforeLayout(gameTime);
 
+            ImGui.PushStyleColor(ImGuiCol.WindowBg, new System.Numerics.Vector4(0f, 0f, 0f, 0.6f));
             ImGui.Begin("Settings", ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoCollapse);
+            // Docks GUI to the side of the window
             // ImGui.SetWindowPos(new System.Numerics.Vector2(0, 0));
             // ImGui.SetWindowSize(new System.Numerics.Vector2(350, 720));
             ImGui.Text("Moods");
@@ -174,6 +178,7 @@ namespace PNGTube
                     if (ImGui.Selectable(a.Name, isSelected))
                     {
                         _inactiveAnimation = Animations.AllAnimations[i];
+                        _settings.InactiveAnimation = i;
                     }
                     if (isSelected) ImGui.SetItemDefaultFocus();
                 }
@@ -190,6 +195,7 @@ namespace PNGTube
                     if (ImGui.Selectable(a.Name, isSelected))
                     {
                         _activeAnimation = Animations.AllAnimations[i];
+                        _settings.ActiveAnimation = i;
                     }
                     if (isSelected) ImGui.SetItemDefaultFocus();
                 }
@@ -218,6 +224,7 @@ namespace PNGTube
                 _settings.SaveSettings();
             }
             ImGui.End();
+            ImGui.PopStyleColor();
             _guiRenderer.AfterLayout();
         }
 
