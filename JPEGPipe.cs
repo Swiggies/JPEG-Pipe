@@ -9,7 +9,7 @@ using MonoGame.Extended.Tweening;
 
 namespace PNGTube
 {
-    public class Game1 : Game
+    public class JPEGPipe : Game
     {
         const float LERP_SPEED = 5.0f;
 
@@ -50,7 +50,7 @@ namespace PNGTube
             }
         }
 
-        public Game1()
+        public JPEGPipe()
         {
             _settings = Settings.LoadSettings();
             _graphics = new GraphicsDeviceManager(this);
