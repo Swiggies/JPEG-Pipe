@@ -134,7 +134,7 @@ namespace PNGTube
             base.Update(gameTime);
         }
 
-        protected override async void Draw(GameTime gameTime)
+        protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(new Color(0, 255, 0));
             // TODO: Add your drawing code here
@@ -209,10 +209,14 @@ namespace PNGTube
                 _settings.ActiveColor = _activeColor;
             ImGui.Spacing();
             if (ImGui.SliderFloat("Threshold", ref _activeThreshold, 0.0f, 1.0f))
+            {
                 _settings.Threshold = _activeThreshold;
+            }
             ImGui.ProgressBar(_mc.SmoothedMicVolume, new System.Numerics.Vector2(0.0f, 0.0f), "");
             if (ImGui.SliderFloat("Delay", ref _delayThreshold, 0.0f, 1.0f))
+            {
                 _settings.Delay = _delayThreshold;
+            }
             ImGui.ProgressBar(_delayTimer, new System.Numerics.Vector2(0.0f, 0.0f), "");
             ImGui.Spacing();
             if (ImGui.Button("Load Image"))

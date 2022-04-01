@@ -4,17 +4,15 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
+    <BeautyLibsDir>libraries</BeautyLibsDir>
+    <DisableBeauty>False</DisableBeauty>
+    <BeautyEnableDebugging>False</BeautyEnableDebugging>
+    <BeautyLogLevel>Info</BeautyLogLevel>
   </PropertyGroup>
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <BeautyLibsDir>libraries</BeautyLibsDir>
-    <DisableBeauty>False</DisableBeauty>
-    <BeautyEnableDebugging>False</BeautyEnableDebugging>
-    <BeautyLogLevel>Info</BeautyLogLevel>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
