@@ -1,7 +1,7 @@
-using Newtonsoft.Json;
 using Microsoft.Xna.Framework;
-using System.IO;
+using Newtonsoft.Json;
 using System;
+using System.IO;
 
 [System.Serializable]
 public class Settings

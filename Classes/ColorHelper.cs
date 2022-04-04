@@ -1,6 +1,4 @@
-using System.Numerics;
 using Microsoft.Xna.Framework;
-using System;
 
 public static class ColorHelper
 {

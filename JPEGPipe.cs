@@ -1,13 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ImGuiNET;
+using ImGuiNET.XNA;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
-using ImGuiNET;
-using ImGuiNET.XNA;
-using MonoGame.Extended.Tweening;
 
-namespace PNGTube
+namespace JPEGPipe
 {
     public class JPEGPipe : Game
     {

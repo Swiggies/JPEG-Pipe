@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PNGTube
+namespace JPEGPipe
 {
     public static class Program
     {

@@ -7,7 +7,7 @@
 			"type": "process",
 			"args": [
 				"build",
-				"${workspaceFolder}/PNGTube.csproj",
+				"${workspaceFolder}/JPEGPipe.csproj",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
@@ -19,7 +19,7 @@
 			"type": "process",
 			"args": [
 				"publish",
-				"${workspaceFolder}/PNGTube.csproj",
+				"${workspaceFolder}/JPEGPipe.csproj",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
@@ -33,7 +33,7 @@
 				"watch",
 				"run",
 				"--project",
-				"${workspaceFolder}/PNGTube.csproj"
+				"${workspaceFolder}/JPEGPipe.csproj"
 			],
 			"problemMatcher": "$msCompile"
 		}

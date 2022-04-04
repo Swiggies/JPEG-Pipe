@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using System;
 using NAudio.Wave;
+using System;
 
 public class MicCapture
 {
