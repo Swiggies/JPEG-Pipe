@@ -11,4 +11,9 @@ public static class ColorHelper
     {
         return new System.Numerics.Vector3(c.R / 255f, c.G / 255f, c.B / 255f);
     }
+
+    public static System.Numerics.Vector3 ToVec3(this Color c)
+    {
+        return new System.Numerics.Vector3(c.R / 255f, c.G / 255f, c.B / 255f);
+    }
 }

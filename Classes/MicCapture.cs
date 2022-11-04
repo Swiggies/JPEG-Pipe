@@ -26,7 +26,6 @@ public class MicCapture
         waveEvent.DataAvailable += OnDataAvailable;
         waveEvent.StartRecording();
         Console.WriteLine(WaveIn.GetCapabilities(0).ProductName);
-
     }
 
     private void OnDataAvailable(object sender, WaveInEventArgs e)

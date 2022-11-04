@@ -9,8 +9,8 @@ public class Settings
     public string SpritePath;
     public int ActiveAnimation = 3;
     public int InactiveAnimation = 1;
-    public Color ActiveColor = Color.White;
-    public Color InactiveColor = Color.LightGray;
+    public System.Numerics.Vector3 ActiveColor = Color.White.ToVec3();
+    public System.Numerics.Vector3 InactiveColor = Color.LightGray.ToVec3();
     public float SpriteScale = 0.5f;
     public float Threshold = 0.1f;
     public float Delay = 0.1f;

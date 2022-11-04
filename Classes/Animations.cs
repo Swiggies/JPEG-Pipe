@@ -10,6 +10,15 @@ public abstract class Animation
 public class Animations
 {
 
+    public Animation ActiveAnimation;
+    public Animation InactiveAnimation;
+
+    public Animations(int activeAnimation, int inactiveAnimation)
+    {
+        ActiveAnimation = AllAnimations[activeAnimation];
+        InactiveAnimation = AllAnimations[inactiveAnimation];
+    }
+
     private static List<Animation> _animations = new List<Animation>()
     {
         new None(),
