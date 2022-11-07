@@ -13,6 +13,9 @@ class GUI
     private readonly Animations _animations;
     private readonly ImGuiRenderer _guiRenderer;
 
+    public Action LoadImageBtnPress;
+    public Action SetFrameRate;
+
     public GUI(Settings settings, Animations animations, ImGuiRenderer guiRenderer)
     {
         _settings = settings;
@@ -73,6 +76,7 @@ class GUI
         if (ImGui.Button("Load Image"))
         {
             // LoadSprite();
+            LoadImageBtnPress?.Invoke();
         }
         ImGui.SliderFloat("Sprite Scale", ref _settings.SpriteScale, 0.0f, 1.0f);
         // _settings.SpriteScale = _spriteScale;
@@ -87,7 +91,7 @@ class GUI
         {
             if (ImGui.SliderInt("FPS", ref _settings.FPS, 15, 60))
             {
-                // TargetElapsedTime = TimeSpan.FromSeconds(1d / (double)_framesPerSecond);
+                SetFrameRate?.Invoke();
             }
         }
 
