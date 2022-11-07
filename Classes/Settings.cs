@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 
-[System.Serializable]
+[Serializable]
 public class Settings
 {
     public string SpritePath;

@@ -75,6 +75,8 @@ namespace JPEGPipe
             _guiRenderer = new ImGuiRenderer(this);
             _guiRenderer.RebuildFontAtlas();
             _gui = new GUI(_settings, _animations, _guiRenderer);
+            _gui.LoadImageBtnPress += LoadSprite;
+            _gui.SetFrameRate += SetFrameRate;
             _currentColor = _inactiveColor;
 
             base.Initialize();
@@ -151,6 +153,11 @@ namespace JPEGPipe
         public void DrawGUI(GameTime gameTime)
         {
             _gui.ShowGUI(gameTime, _delayTimer, _mc.SmoothedMicVolume);
+        }
+
+        public void SetFrameRate()
+        {
+            TargetElapsedTime = TimeSpan.FromSeconds(1d / (double)_settings.FPS);
         }
 
         private void LoadSprite()
