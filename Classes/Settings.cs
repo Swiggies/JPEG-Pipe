@@ -6,7 +6,8 @@ using System.IO;
 [Serializable]
 public class Settings
 {
-    public string SpritePath;
+    public Sprites InactiveSprites = new Sprites();
+    public Sprites ActiveSprites = new Sprites();
     public int ActiveAnimation = 3;
     public int InactiveAnimation = 1;
     public System.Numerics.Vector3 ActiveColor = Color.White.ToVec3();

@@ -18,7 +18,7 @@ namespace JPEGPipe
         private MicCapture _mc;
         private ImGuiRenderer _guiRenderer;
         private GUI _gui;
-        private Texture2D _sprite;
+        private Sprites _sprites;
         private Vector2 _spriteOffset;
         private Vector2 _windowStartPos;
         private Color _currentColor;
@@ -46,8 +46,13 @@ namespace JPEGPipe
 
         public JPEGPipe()
         {
-            _settings = Settings.LoadSettings();
-            _graphics = new GraphicsDeviceManager(this);
+            ServiceLocator.Create();
+            ServiceLocator.Current.Register(_settings = Settings.LoadSettings());
+            _settings = ServiceLocator.Current.Get<Settings>();
+            ServiceLocator.Current.Register(_graphics = new GraphicsDeviceManager(this));
+            _graphics = ServiceLocator.Current.Get<GraphicsDeviceManager>();
+            // _settings = Settings.LoadSettings();
+            // _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -64,9 +69,6 @@ namespace JPEGPipe
             //Console.WriteLine(_mc.Mic.State);
             _windowStartPos = Window.Position.ToVector2();
 
-            // Loading from settings
-            if (!String.IsNullOrEmpty(_settings.SpritePath))
-                LoadSpriteFromPath(_settings.SpritePath);
 
             _animations = new Animations(_settings.ActiveAnimation, _settings.InactiveAnimation);
             TargetElapsedTime = TimeSpan.FromSeconds(1 / (double)_settings.FPS);
@@ -74,10 +76,12 @@ namespace JPEGPipe
             // GUIRenderer = new ImGUIRenderer(this).Initialize().RebuildFontAtlas();
             _guiRenderer = new ImGuiRenderer(this);
             _guiRenderer.RebuildFontAtlas();
-            _gui = new GUI(_settings, _animations, _guiRenderer);
+            _gui = new GUI(_settings, _animations, _guiRenderer, _graphics);
             _gui.LoadImageBtnPress += LoadSprite;
             _gui.SetFrameRate += SetFrameRate;
             _currentColor = _inactiveColor;
+
+            _sprites = _settings.InactiveSprites;
 
             base.Initialize();
         }
@@ -130,14 +134,14 @@ namespace JPEGPipe
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
 
-            if (_sprite != null)
+            if (_sprites.CurrentSprite != null)
             {
                 int scaleLerp = (int)MathHelper.Lerp(-100, 100, _settings.SpriteScale);
                 int scale = 720 - scaleLerp;
                 Rectangle destRect = new Rectangle(scaleLerp / 2, scaleLerp / 2, scale, scale);
-                Rectangle sourceRect = new Rectangle(0, 0, _sprite.Width, _sprite.Height);
+                Rectangle sourceRect = new Rectangle(0, 0, _sprites.CurrentSprite.Width, _sprites.CurrentSprite.Height);
 
-                _spriteBatch.Draw(_sprite, destRect, sourceRect, _currentColor, 0, _spriteOffset, SpriteEffects.None, 0);
+                _spriteBatch.Draw(_sprites.CurrentSprite, destRect, sourceRect, _currentColor, 0, _spriteOffset, SpriteEffects.None, 0);
             }
             _spriteBatch.End();
             base.Draw(gameTime);
@@ -172,10 +176,7 @@ namespace JPEGPipe
 
         private void LoadSpriteFromPath(string path)
         {
-            FileStream fs = new FileStream(path, FileMode.Open);
-            _sprite = Texture2D.FromStream(_graphics.GraphicsDevice, fs);
-            fs.Dispose();
-            _settings.SpritePath = path;
+            _settings.InactiveSprites.CreateNewSprite(path);
         }
     }
 }
